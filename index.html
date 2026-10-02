@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>14th LANE | Meniu Complet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-navy: #102235;
+      --navy-dark: #0a1724;
+      --accent-gold: #c59b27;
+      --bg-page: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.4;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background-color: #ffffff;
+      min-height: 100vh;
+      padding-bottom: 40px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Antet cu Logo oficial 14th LANE centrat */
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 22px 18px 16px;
+      border-bottom: 1px solid var(--border-color);
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand-svg {
+      width: 190px;
+      height: auto;
+      display: block;
+    }
+
+    /* Căutare rapidă */
+    .search-container {
+      padding: 14px 18px 10px;
+      background: #ffffff;
+    }
+
+    .search-input {
+      width: 100%;
+      border: 1px solid var(--border-color);
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-navy);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(16, 34, 53, 0.1);
+    }
+
+    /* Categorii - Încadrate 100% în pagină */
+    .categories-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 18px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      width: 100%;
+    }
+
+    .cat-btn {
+      flex: 0 1 auto;
+      background: #f1f5f9;
+      color: var(--primary-navy);
+      border: 1px solid var(--border-color);
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .cat-btn.active {
+      background: var(--primary-navy);
+      color: #ffffff;
+      border-color: var(--primary-navy);
+    }
+
+    /* Listă Produse */
+    .items-container {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .product-img-wrapper {
+      width: 100%;
+      height: 200px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .placeholder-badge {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .product-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .product-header-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .product-title {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--primary-navy);
+      line-height: 1.35;
+    }
+
+    /* Badges dietetice */
+    .diet-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .diet-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.2px;
+    }
+
+    .badge-vegetarian {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    .badge-gluten-free {
+      background: #fefce8;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .badge-fish {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .product-desc {
+      font-size: 0.82rem;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    .product-allergens {
+      font-size: 0.74rem;
+      color: #b45309;
+      background: #fffbeb;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border-left: 3px solid #f59e0b;
+      margin-top: 2px;
+    }
+
+    .product-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .meta-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: #f1f5f9;
+      color: var(--text-muted);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #f8fafc;
+    }
+
+    .price-btn {
+      background: var(--primary-navy);
+      color: #ffffff;
+      border-radius: 4px;
+      padding: 8px 14px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .price-btn.no-price {
+      background: #475569;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Subsol disclaimer */
+    .menu-disclaimer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 24px 18px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header class="top-bar">
+      <!-- Logo 14th LANE centrat si incadrat corect -->
+      <svg class="brand-svg" viewBox="0 0 450 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="434" height="110" stroke="#102235" stroke-width="12" rx="2"/>
+        <text x="26" y="98" fill="#102235" font-family="'Montserrat', sans-serif" font-weight="800" font-size="94">14</text>
+        <text x="138" y="58" fill="#102235" font-family="'Montserrat', sans-serif" font-weight="700" font-size="44">th</text>
+        <text x="424" y="96" text-anchor="end" fill="#102235" font-family="'Montserrat', sans-serif" font-weight="600" font-size="12.5" letter-spacing="0.5">BY BOUTIQUE DU PAIN</text>
+        <text x="6" y="235" fill="#102235" font-family="'Montserrat', sans-serif" font-weight="800" font-size="134" letter-spacing="4">LANE</text>
+        <polygon points="172,130 188,130 274,244 258,244" fill="#ffffff"/>
+      </svg>
+    </header>
+
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Caută în meniu (ex: Somon, Negroni, San Sebastian...)">
+    </div>
+
+    <div class="categories-bar" id="categoriesContainer"></div>
+
+    <div class="items-container" id="menuList"></div>
+
+    <div class="menu-disclaimer">
+      * Imaginile sunt cu titlu de prezentare.
+    </div>
+  </div>
+
+  <script>
+    const menuData = [
+      // ==========================================
+      // PENTRU ÎNCEPUT
+      // ==========================================
+      {
+        name: "Salată Caesar reinterpretată",
+        category: "Pentru început",
+        price: "47",
+        weight: "370g",
+        kcal: "599 kcal",
+        desc: "salată iceberg, piept pui, sos Caesar, parmezan, prosciutto chips, vlăstari",
+        allergens: "Lapte (Lactoză), Gluten, Peşte, Ouă",
+        img: "Salata Caesar.jpg",
+        tags: []
+      },
+      {
+        name: "Carpaccio de sfeclă cu brânză de capră",
+        category: "Pentru început",
+        price: "47",
+        weight: "300g",
+        kcal: "514 kcal",
+        desc: "sfeclă roșie, brânză capră, smochine, ouă, dulceață de smochine, fistic, panko, limes, făină",
+        allergens: "Lapte (Lactoză), Quă, Gluten, Fructe cu coajă (Fistic)",
+        img: "Carpaccio de sfecla.jpg",
+        tags: ["veg"]
+      },
+      {
+        name: "Salată fresh de dovleac cu nucă",
+        category: "Pentru început",
+        price: "44",
+        weight: "350g",
+        kcal: "295 kcal",
+        desc: "dovleac plăcintar, nucă, parmezan, vlăstari, dressing (muştar Dijon, lămâie, ulei măsline)",
+        allergens: "Lapte (Lactoză), Fructe cu coajă (Nucă), Muştar",
+        img: "Salata de dovleac.jpg",
+        tags: ["veg", "gf"]
+      },
+      {
+        name: "Cuib de sfere cu somon",
+        category: "Pentru început",
+        price: "69",
+        weight: "350g",
+        kcal: "824 kcal",
+        desc: "sfere de somon, somon, cartof dulce, sos cu portocale, iaurt şi măsline Kalamata, paste orez, ulei picant, vlăstari, pesto",
+        allergens: "Peşte, Gluten, Ouă, Lapte (Lactoză), Fructe cu coajă lemnoasă (Pesto)",
+        img: "Cuib de sfere cu Somon.jpg",
+        tags: ["fish"]
+      },
+
+      // ==========================================
+      // FELURI PRINCIPALE
+      // ==========================================
+      {
+        name: "Tournedos Rossini",
+        category: "Feluri principale",
+        price: "174",
+        weight: "500g",
+        kcal: "1477 kcal",
+        desc: "muşchi vită Uruguay, foie gras, broccolini, baby morcov, trufe, unt, ulei măsline, sfeclă",
+        allergens: "Lapte (Lactoză)",
+        img: "Tournedous Rossini.jpg",
+        tags: ["gf"]
+      },
+      {
+        name: "File de spadă cu nori de cartofi",
+        category: "Feluri principale",
+        price: "89",
+        weight: "470g",
+        kcal: "641 kcal",
+        desc: "file de spadă, baby spanac, cartofi, unt, smântână dulce, baby măcriş, roşii, ardei kapia copt, măsline Kalamata, pătrunjel verde, vlăstari, sare Maldon, ulei picant, ulei de măsline, curry",
+        allergens: "Peşte (File de spadă), Lapte/Lactoză (Unt, Smântână dulce), Dioxid de sulf / Sulfiti (Măsline Kalamata, ardei copt - dacă conțin conservanti)",
+        img: "File de spada cu nori de cartofi.jpg",
+        tags: ["fish", "gf"]
+      },
+      {
+        name: "Somon cu porumb pufos",
+        category: "Feluri principale",
+        price: "87",
+        weight: "450g",
+        kcal: "1130 kcal",
+        desc: "somon file, porumb, broccolini, mazăre, baby corn, conopidă, unt, rozmarin, ulei, piper",
+        allergens: "Peşte, Lapte (Lactoză)",
+        img: "Somon cu porumb pufos.jpg",
+        tags: ["fish", "gf"]
+      },
+      {
+        name: "Humus cu bavetă de vită",
+        category: "Feluri principale",
+        price: "65",
+        weight: "350g",
+        kcal: "1505 kcal",
+        desc: "năut, bavetă vită, ulei măsline, tahini, rozmarin, usturoi, lămâie, sumac, ceapă prăjită",
+        allergens: "Seminţe de susan, Gluten",
+        img: "Humus cu baveta de vita.jpg",
+        tags: []
+      },
+      {
+        name: "Piept de pui și piure de păstârnac",
+        category: "Feluri principale",
+        price: "69",
+        weight: "500g",
+        kcal: "1103 kcal",
+        desc: "piept pui, păstârnac, baby morcov, ciuperci pleurotus/brune, cartofi, unt, cimbru, ulei",
+        allergens: "Telină, Lapte (Lactoză)",
+        img: "Piept de pui cu piure de pastarnac.jpg",
+        tags: ["gf"]
+      },
+      {
+        name: "Burger 14th",
+        category: "Feluri principale",
+        price: "65",
+        weight: "350g",
+        kcal: "1189 kcal",
+        desc: "carne de vită, chiflă, camembert, bacon, sos burger, salată lolo bionda, ceapă șalot, fulgi ceapă",
+        allergens: "Gluten, Lapte (Lactoză), Ouă, Muștar, Susan",
+        img: "Burger 14th Lane.jpg",
+        tags: []
+      },
+      {
+        name: "Piept rață cu piure de cartofi dulci",
+        category: "Feluri principale",
+        price: "76",
+        weight: "350g",
+        kcal: "655 kcal",
+        desc: "piept rață, cartofi dulci, varză roșie călită, unt, smântână, portocale, ghimbir, nucșoară, lapte",
+        allergens: "Lapte (Lactoză)",
+        img: "Piept de Rata cu piure de cartofi dulci.jpg",
+        tags: ["gf"]
+      },
+      {
+        name: "Risotto cu dovleac și trufe",
+        category: "Feluri principale",
+        price: "49",
+        weight: "400g",
+        kcal: "1151 kcal",
+        desc: "orez arborio, dovleac, parmezan, unt, vin alb, trufe, panceta, smântână de gătit, portocale",
+        allergens: "Lapte (Lactoză), Sulfiți",
+        img: "Risotto cu dovleac si trufe.jpg",
+        tags: ["veg"]
+      },
+      {
+        name: "Mușchiuleț porc cu țelină",
+        category: "Feluri principale",
+        price: "74",
+        weight: "500g",
+        kcal: "701 kcal",
+        desc: "mușchiuleț porc, sparanghel, țelină, sfeclă roșie, trufe, unt, cimbru, ulei măsline",
+        allergens: "Țelină, Lapte (Lactoză)",
+        img: "Muschiulet de porc cu Telina.jpg",
+        tags: ["gf"]
+      },
+      {
+        name: "Cotlet de miel cu năut și legume",
+        category: "Feluri principale",
+        price: "110",
+        weight: "450g",
+        kcal: "1256 kcal",
+        desc: "cotlet miel Noua Zeelandă, năut, ulei măsline, cimbru verde, usturoi, sare, piper boabe, ulei verde, sare Maldon, ceapă șalotă albă, ardei kapia roșu, ardei verde iute, sos de roșii, boia afumată, roșii, chimion, ardei verde",
+        allergens: "Preparatul conține țelină/fructe cu coajă",
+        img: "Cotlet de Miel cu naut si legume.jpg",
+        tags: ["gf"]
+      },
+
+      // ==========================================
+      // ALĂTURI
+      // ==========================================
+      {
+        name: "Duet ciuperci de pădure",
+        category: "Alături",
+        price: "32",
+        weight: "300g",
+        kcal: "458 kcal",
+        desc: "ciuperci brune, ciuperci pleurotus, unt, ceapă șalot, cimbru proaspăt",
+        allergens: "Lapte (Lactoză)",
+        img: "Duet ciuperci de padure.jpg",
+        tags: ["veg", "gf"]
+      },
+      {
+        name: "Cartofi prăjiți sub ploaie de cheddar",
+        category: "Alături",
+        price: "28",
+        weight: "300g",
+        kcal: "756 kcal",
+        desc: "cartofi, brânză cheddar, pătrunjel proaspăt",
+        allergens: "Lapte (Lactoză)",
+        img: "Cartofi prajiti sub ploaie de cheddar.jpg",
+        tags: ["veg", "gf"]
+      },
+      {
+        name: "Piure cu trufe",
+        category: "Alături",
+        price: "30",
+        weight: "350g",
+        kcal: "697 kcal",
+        desc: "cartofi, unt, cremă trufe, cimbru, smântână, usturoi proaspăt",
+        allergens: "Lapte (Lactoză)",
+        img: "Piure cu trufe.jpg",
+        tags: ["veg", "gf"]
+      },
+      {
+        name: "Legume sotte cu ierburi provance",
+        category: "Alături",
+        price: "28",
+        weight: "350g",
+        kcal: "312 kcal",
+        desc: "fasole verde, ardei semafor, țelină, morcovi, dovlecei, ulei măsline",
+        allergens: "Țelină",
+        img: "Legume sotte cu ierburi provance.jpg",
+        tags: ["veg", "gf"]
+      },
+      {
+        name: "Cartofi raclette gratinați",
+        category: "Alături",
+        price: "30",
+        weight: "350g",
+        kcal: "589 kcal",
+        desc: "cartofi raclette, cartofi violeți, mozzarella, ulei, pătrunjel, boia afumată",
+        allergens: "Lapte (Lactoză)",
+        img: "Cartofi raclette gratinati.jpg",
+        tags: ["veg", "gf"]
+      },
+
+      // ==========================================
+      // VINURI LOCALE
+      // ==========================================
+      { name: "1000 DE CHIPURI - VIN IORDACHE FETEASCĂ ALBA 0.75 L", category: "Vinuri Locale", price: "190", weight: "0.75L", kcal: "", desc: "1000 DE CHIPURI", allergens: "", img: "" },
+      { name: "1000 DE CHIPURI-VIN ROSE 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "1000 DE CHIPURI", allergens: "", img: "" },
+      { name: "1000 DE CHIPURI-VIN SHIRAZ SEC 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "1000 DE CHIPURI", allergens: "", img: "" },
+      { name: "AVINCIS - VIN CRAMPOȘIE SELECȚIONATĂ SEC 0.75L", category: "Vinuri Locale", price: "175", weight: "0.75L", kcal: "", desc: "AVINCIS", allergens: "", img: "" },
+      { name: "ALUTUS PRIMUS - VIN CUVEE ROŞU SEC 0.75L", category: "Vinuri Locale", price: "220", weight: "0.75L", kcal: "", desc: "AVINCIS", allergens: "", img: "" },
+      { name: "AVINCIS - VIN NEGRU DE DRĂGĂŞANI SEC 0.75L", category: "Vinuri Locale", price: "190", weight: "0.75L", kcal: "", desc: "AVINCIS", allergens: "", img: "" },
+      { name: "CUVÉE 49 - VIN BLANC CHARDONNAY & TĂMÂIOASĂ ROMÂNEASCĂ SEC 0.75L", category: "Vinuri Locale", price: "210", weight: "0.75L", kcal: "", desc: "BECIUL DOMNESC", allergens: "", img: "" },
+      { name: "CUVÉE 49 - VIN ROUGE FETEASCĂ NEAGRĂ & CABERNET SAUVIGNON SEC 0.75L", category: "Vinuri Locale", price: "210", weight: "0.75L", kcal: "", desc: "BECIUL DOMNESC", allergens: "", img: "" },
+      { name: "THE SIGN-VIN FUME SEC 0.75L", category: "Vinuri Locale", price: "170", weight: "0.75L", kcal: "", desc: "BUDUREASCA", allergens: "", img: "" },
+      { name: "THE SIGN-VIN PINCOMET ROSE SEC 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "BUDUREASCA", allergens: "", img: "" },
+      { name: "THE SIGN-VIN SAUVIGNON & SAUVIGNON SEC 0.75L", category: "Vinuri Locale", price: "170", weight: "0.75L", kcal: "", desc: "BUDUREASCA", allergens: "", img: "" },
+      { name: "CORCOVA-VIN CHARDONNAY SEC 0.75L", category: "Vinuri Locale", price: "150", weight: "0.75L", kcal: "", desc: "CORCOVA", allergens: "", img: "" },
+      { name: "CORCOVA - VIN ROSE SEC 0.75L", category: "Vinuri Locale", price: "150", weight: "0.75L", kcal: "", desc: "CORCOVA", allergens: "", img: "" },
+      { name: "CORCOVA-VIN CABERNET S. MERLOT SEC 0.75L", category: "Vinuri Locale", price: "150", weight: "0.75L", kcal: "", desc: "CORCOVA", allergens: "", img: "" },
+      { name: "CONCEPT-VIN ALB FRÂNCUŞĂ SEC 0.75L", category: "Vinuri Locale", price: "140", weight: "0.75L", kcal: "", desc: "COTNARI", allergens: "", img: "" },
+      { name: "CONCEPT-VIN ROSE SEC 0.75L", category: "Vinuri Locale", price: "140", weight: "0.75L", kcal: "", desc: "COTNARI", allergens: "", img: "" },
+      { name: "CONCEPT-VIN FETEASCĂ NEAGRĂ SEC 0.75L", category: "Vinuri Locale", price: "150", weight: "0.75L", kcal: "", desc: "COTNARI", allergens: "", img: "" },
+      { name: "NOCTURNE - VIN PINOT GRIGIO DE PURCARI SEC 0.75L", category: "Vinuri Locale", price: "175", weight: "0.75L", kcal: "", desc: "PURCARI", allergens: "", img: "" },
+      { name: "NOCTURNE - VIN ROSE DE PURCARI SEC 0.75L", category: "Vinuri Locale", price: "175", weight: "0.75L", kcal: "", desc: "PURCARI", allergens: "", img: "" },
+      { name: "NOCTURNE - VIN RARĂ NEAGRĂ DE PURCARI SEC 0.75L", category: "Vinuri Locale", price: "175", weight: "0.75L", kcal: "", desc: "PURCARI", allergens: "", img: "" },
+      { name: "BACANTA - VIN SPECIAL EDITION ŞARBĀ 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "CRAMA GİRBOIU", allergens: "", img: "" },
+      { name: "BACANTA - VIN SPECIAL EDITION ROSE SEC 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "CRAMA GİRBOIU", allergens: "", img: "" },
+      { name: "BACANTA - VIN MERLOT BARRIQUE SEC 0.75L", category: "Vinuri Locale", price: "190", weight: "0.75L", kcal: "", desc: "CRAMA GİRBOIU", allergens: "", img: "" },
+      { name: "IMPLICIT-VIN SAUVIGNON BLANC SEC 0.75L", category: "Vinuri Locale", price: "145", weight: "0.75L", kcal: "", desc: "CRAMELE RECAS", allergens: "", img: "" },
+      { name: "IMPLICIT-VIN ROSE SEC 0.75L", category: "Vinuri Locale", price: "145", weight: "0.75L", kcal: "", desc: "CRAMELE RECAS", allergens: "", img: "" },
+      { name: "IMPLICIT - VIN FETEASCĂ NEAGRĂ SEC 0.75L", category: "Vinuri Locale", price: "145", weight: "0.75L", kcal: "", desc: "CRAMELE RECAS", allergens: "", img: "" },
+      { name: "SOLEVIN CHARDONNAY SEC 0.75L", category: "Vinuri Locale", price: "190", weight: "0.75L", kcal: "", desc: "CRAMELE RECAS", allergens: "", img: "" },
+      { name: "SOLO QUINTA - VIN ALB SEC 0.75L", category: "Vinuri Locale", price: "210", weight: "0.75L", kcal: "", desc: "CRAMELE RECAS", allergens: "", img: "" },
+      { name: "SOLO QUINTA - VIN ROSE SEC 0.75L", category: "Vinuri Locale", price: "200", weight: "0.75L", kcal: "", desc: "CRAMELE RECAS", allergens: "", img: "" },
+      { name: "EXCLUSIVE-VIN CHARDONNAY SEC 0.75L", category: "Vinuri Locale", price: "140", weight: "0.75L", kcal: "", desc: "DOMENIILE MITROI", allergens: "", img: "" },
+      { name: "EXCLUSIVE - VIN CABERNET SAUVIGNON ROSE SEC 0.75L", category: "Vinuri Locale", price: "140", weight: "0.75L", kcal: "", desc: "DOMENIILE MITROI", allergens: "", img: "" },
+      { name: "3 AM-VIN ROSE DEMIDULCE 0.75L", category: "Vinuri Locale", price: "140", weight: "0.75L", kcal: "", desc: "DOMENIILE MITROI", allergens: "", img: "" },
+      { name: "NEDEEA - VIN CUPAJ ALB 0.75L", category: "Vinuri Locale", price: "150", weight: "0.75L", kcal: "", desc: "DOMAINE VINARTE", allergens: "", img: "" },
+      { name: "NEDEEA - VIN CUPAJ ROŞU SEC 0.75L", category: "Vinuri Locale", price: "150", weight: "0.75L", kcal: "", desc: "DOMAINE VINARTE", allergens: "", img: "" },
+      { name: "NEDEEA-VIN ROSE SEC 0.75L", category: "Vinuri Locale", price: "150", weight: "0.75L", kcal: "", desc: "DOMAINE VINARTE", allergens: "", img: "" },
+      { name: "OWNER'S CHOICE-ANA VIN SAUVIGNON SEC 0,75L", category: "Vinuri Locale", price: "190", weight: "0,75L", kcal: "", desc: "JIDVEI", allergens: "", img: "" },
+      { name: "OWNER'S CHOICE-MARIA VIN PINOT GRIS SEC 0,75L", category: "Vinuri Locale", price: "190", weight: "0,75L", kcal: "", desc: "JIDVEI", allergens: "", img: "" },
+      { name: "MYSTERIUM-VIN TRAMINER SAUVIGNON BLANC SEC 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "JIDVEI", allergens: "", img: "" },
+      { name: "MYSTERIUM-VIN ROSE SEC 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "JIDVEI", allergens: "", img: "" },
+      { name: "PRINCEPS CAII DE LA LETEA - VIN ALIGOTE SEC 0.75L", category: "Vinuri Locale", price: "165", weight: "0.75L", kcal: "", desc: "VIA VITICOLA", allergens: "", img: "" },
+      { name: "PRINCEPS CAII DE LA LETEA - VIN ROSE SEC 0.75L", category: "Vinuri Locale", price: "165", weight: "0.75L", kcal: "", desc: "VIA VITICOLA", allergens: "", img: "" },
+      { name: "PRINCEPS CAII DE LA LETEA - VIN CABERNET & FETEASCĂ NEAGRĂ SEC 0.75L", category: "Vinuri Locale", price: "165", weight: "0.75L", kcal: "", desc: "VIA VITICOLA", allergens: "", img: "" },
+      { name: "ODOR-VIN FETEASCĂ REGALĂ & FETEASCĂ ALBA SEC 0.75L", category: "Vinuri Locale", price: "140", weight: "0.75L", kcal: "", desc: "VIA VITICOLA", allergens: "", img: "" },
+      { name: "ODOR-VIN ROSE SEC 0.75L", category: "Vinuri Locale", price: "140", weight: "0.75L", kcal: "", desc: "VIA VITICOLA", allergens: "", img: "" },
+      { name: "ODOR - VIN FETEASCĂ NEAGRĂ & MERLOT & CABERNET SAUVIGNON SEC 0.75L", category: "Vinuri Locale", price: "140", weight: "0.75L", kcal: "", desc: "VIA VITICOLA", allergens: "", img: "" },
+      { name: "PATIMA-VIN MERLOT SEC 0.75L", category: "Vinuri Locale", price: "250", weight: "0.75L", kcal: "", desc: "VIA VITICOLA", allergens: "", img: "" },
+      { name: "COLTUL PIETREI - VIN CHARDONNAY SEC 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "VITIS METAMORFOSIS", allergens: "", img: "" },
+      { name: "COLȚUL PIETREI - VIN SAUVIGNON BLANC SEC 0.75L", category: "Vinuri Locale", price: "160", weight: "0.75L", kcal: "", desc: "VITIS METAMORFOSIS", allergens: "", img: "" },
+      { name: "CANTUS PRIMUS-VIN CABERNET SAUVIGNON SEC 0.75L", category: "Vinuri Locale", price: "210", weight: "0.75L", kcal: "", desc: "VITIS METAMORFOSIS", allergens: "", img: "" },
+      { name: "ALIRA ALIMAN-VIN CHARDONNAY OAK SEC 0.75L", category: "Vinuri Locale", price: "210", weight: "0.75L", kcal: "", desc: "WINERO", allergens: "", img: "" },
+      { name: "ALIRA ALIMAN-VIN FETEASCĂ NEAGRĂ SEC 0.75L", category: "Vinuri Locale", price: "210", weight: "0.75L", kcal: "", desc: "WINERO", allergens: "", img: "" },
+      { name: "ALIRA-VIN ALIENTO ROSE SEC 0.75L", category: "Vinuri Locale", price: "180", weight: "0.75L", kcal: "", desc: "WINERO", allergens: "", img: "" },
+
+      // ==========================================
+      // VINURI IMPORT
+      // ==========================================
+      { name: "FRESCOBALDI-ATTEMS PINOT GRIGIO FRIULI VIN ALB DOC 12,5% ALC 0.75L", category: "Vinuri Import", price: "190", weight: "0.75L", kcal: "", desc: "FRESCOBALDI", allergens: "", img: "" },
+      { name: "FRESCOBALDI-CASTELLO NIPOZZANO RISERVA CHIANTI-RUFINA VIN ROŞU DOCG 13% ALC 0.75L", category: "Vinuri Import", price: "190", weight: "0.75L", kcal: "", desc: "FRESCOBALDI", allergens: "", img: "" },
+      { name: "FRESCOBALDI-TENUTA AMMIRAGLIA ALIE TOSCANA VIN ROSE IGT 12,5% ALC 0.75L", category: "Vinuri Import", price: "180", weight: "0.75L", kcal: "", desc: "FRESCOBALDI", allergens: "", img: "" },
+      { name: "ITALIA-SAN MARZANO-TIMO VERMENTINO SALENTO VIN ALB IGP 750 ML", category: "Vinuri Import", price: "130", weight: "750 ML", kcal: "", desc: "SAN MARZANO", allergens: "", img: "" },
+      { name: "ITALIA-SAN MARZANO-TALO CHARDONNAY IGP PUGLIA 750ML", category: "Vinuri Import", price: "150", weight: "750ML", kcal: "", desc: "SAN MARZANO", allergens: "", img: "" },
+      { name: "ITALIA-SAN MARZANO-TRAMARI ROSE DI PRIMITIVO SALENTO IGP 12,5% ALC 750 ML", category: "Vinuri Import", price: "140", weight: "750 ML", kcal: "", desc: "SAN MARZANO", allergens: "", img: "" },
+      { name: "ITALIA - SAN MARZANO-TALO PRIMITIVO DI MANDURIA VIN ROŞU DOP 14% ALC 750 ML", category: "Vinuri Import", price: "165", weight: "750 ML", kcal: "", desc: "SAN MARZANO", allergens: "", img: "" },
+      { name: "ITALIA-SAN MARZANO-SESSANTANNI PRIMITIVO DI MANDURIA VIN ROSU DOP 14,5% ALC 750 ML", category: "Vinuri Import", price: "270", weight: "750 ML", kcal: "", desc: "SAN MARZANO", allergens: "", img: "" },
+      { name: "ITALIA - SAN MARZANO-F NEGROAMARO SALENTO VIN ROŞU IGP 14,5% ALC 750 ML", category: "Vinuri Import", price: "270", weight: "750 ML", kcal: "", desc: "SAN MARZANO", allergens: "", img: "" },
+      { name: "ITALIA-BULGARINI-FIOR DI LAGO VIN ALB 12,5% ALC 0,75 L", category: "Vinuri Import", price: "180", weight: "0,75 L", kcal: "", desc: "BULGARINI", allergens: "", img: "" },
+      { name: "ITALIA-BULGARINI-LUGANA \"010\" VIN ALB DOC 13,5% ALC 0,75 L", category: "Vinuri Import", price: "210", weight: "0,75 L", kcal: "", desc: "BULGARINI", allergens: "", img: "" },
+      { name: "ITALIA-BULGARINI-CHIARETTO RIVIERA DEL GARDA CLASSICO VIN ROSE DOC 12,5% ALC 0,75 L", category: "Vinuri Import", price: "190", weight: "0,75 L", kcal: "", desc: "BULGARINI", allergens: "", img: "" },
+      { name: "ITALIA-MANDRAROSSA - GRILLO COSTADUNE DOC VIN ALB 750 ML", category: "Vinuri Import", price: "145", weight: "750 ML", kcal: "", desc: "MANDRAROSSA", allergens: "", img: "" },
+      { name: "ITALIA - MANDRAROSSA - NERO D'AVOLA DOC VIN ROSU 750 ML BIO", category: "Vinuri Import", price: "145", weight: "750 ML", kcal: "", desc: "MANDRAROSSA", allergens: "", img: "" },
+      { name: "CASTELFEDER - SAUVIGNON RAIF VIGNETI DOLOMITI IGT-VIN ALB 0.75L", category: "Vinuri Import", price: "210", weight: "0.75L", kcal: "", desc: "CASTELFEDER", allergens: "", img: "" },
+      { name: "CASTELFEDER-PINOT GRIGIO 15 DOC - VIN ALB 0.75L", category: "Vinuri Import", price: "190", weight: "0.75L", kcal: "", desc: "CASTELFEDER", allergens: "", img: "" },
+      { name: "ZUCCARDIQ CHARDONNAY VIN ALB 0.75L", category: "Vinuri Import", price: "190", weight: "0.75L", kcal: "", desc: "ZUCCARDI", allergens: "", img: "" },
+      { name: "ZUCCARDI-CONCRETO MALBEC VIN ROŞU 0.75L", category: "Vinuri Import", price: "310", weight: "0.75L", kcal: "", desc: "ZUCCARDI", allergens: "", img: "" },
+      { name: "TOMMASI-SINGLE VINEYARDS-LE VOLPARE SOAVE CLASSICO DOC- VIN ALB 0,75L", category: "Vinuri Import", price: "170", weight: "0,75L", kcal: "", desc: "TOMMASI", allergens: "", img: "" },
+      { name: "TOMMASI - AMARONE DELLA VALPOLICELLA CLASSICO DOCG-VIN ROSU 0,75L", category: "Vinuri Import", price: "370", weight: "0,75L", kcal: "", desc: "TOMMASI", allergens: "", img: "" },
+      { name: "MIGUEL TORRES - VINA ESMERALDA VIN ALB 0.75L", category: "Vinuri Import", price: "130", weight: "0.75L", kcal: "", desc: "MIGUEL TORRES", allergens: "", img: "" },
+      { name: "MIGUEL TORRES - VINA ESMERALDA VIN ROSE 0.75L", category: "Vinuri Import", price: "130", weight: "0.75L", kcal: "", desc: "MIGUEL TORRES", allergens: "", img: "" },
+      { name: "KENDALL-JACKSON - VINTNER'S RESERVE - CALIFORNIA CHARDONNAY 750ML", category: "Vinuri Import", price: "210", weight: "750ML", kcal: "", desc: "JACKSON FAMILY WINES", allergens: "", img: "" },
+      { name: "KENDALL-JACKSON-VINTNER'S RESERVE -MENDOCINO COUNTY ZINFANDEL 750ML", category: "Vinuri Import", price: "210", weight: "750ML", kcal: "", desc: "JACKSON FAMILY WINES", allergens: "", img: "" },
+      { name: "FRANTA-ULTIMATE PROVENCE-COTES DE PROVENCE AOP - VIN ROSE 0.75 L", category: "Vinuri Import", price: "240", weight: "0.75 L", kcal: "", desc: "TERRES DE BERNE", allergens: "", img: "" },
+      { name: "FRANTA-ULTIMATE PROVENCE-COTES DE PROVENCE AOP - VIN ROSE 1.5 L", category: "Vinuri Import", price: "420", weight: "1.5 L", kcal: "", desc: "TERRES DE BERNE", allergens: "", img: "" },
+      { name: "FRANTA-DOMAINE ROC DE L'ABBAYE - CUVÉE TRADITION -POUILLY-FUME AOP 0,75 L", category: "Vinuri Import", price: "240", weight: "0.75 L", kcal: "", desc: "ROC DE L'ABBAYE", allergens: "", img: "" },
+      { name: "FRANŢA-DOMAINE ROC DE L'ABBAYE - CUVÉE TRADITION - SANCERRE BLANC AOP 0,75 L", category: "Vinuri Import", price: "240", weight: "0.75 L", kcal: "", desc: "ROC DE L'ABBAYE", allergens: "", img: "" },
+      { name: "B&G-CHABLIS SAINT LOUIS VIN ALB AOP 0.75 L VINTAGE-12% ALC", category: "Vinuri Import", price: "200", weight: "0.75 L", kcal: "", desc: "SASU BARTON ET GUESTIER", allergens: "", img: "" },
+      { name: "B&G-CHATEAU MAGNOL AOP HAUT MEDOC VIN ROŞU 0.75L", category: "Vinuri Import", price: "240", weight: "0.75L", kcal: "", desc: "SASU BARTON ET GUESTIER", allergens: "", img: "" },
+      { name: "VELENOSI-OFFIDA PECORINO VILLA ANGELA VIN ALB DOCG 0,75L", category: "Vinuri Import", price: "190", weight: "0,75L", kcal: "", desc: "VELENOSI", allergens: "", img: "" },
+      { name: "VELENOSI - MARCHE IGT-VIN ROSE 0,75L", category: "Vinuri Import", price: "175", weight: "0,75L", kcal: "", desc: "VELENOSI", allergens: "", img: "" },
+      { name: "VELENOSI - NINFA MARCHE ROSSO IGT 0,75L", category: "Vinuri Import", price: "190", weight: "0,75L", kcal: "", desc: "VELENOSI", allergens: "", img: "" },
+      { name: "VELENOSI-LUDI OFFIDA DOCG-VIN ROŞU 0,75L", category: "Vinuri Import", price: "350", weight: "0,75L", kcal: "", desc: "VELENOSI", allergens: "", img: "" },
+
+      // ==========================================
+      // SPUMANTE & ȘAMPANIE
+      // ==========================================
+      { name: "PURCARI 1827-VIN SPUMANT ALB EXTRABRUT 0.75L", category: "Spumante & Șampanie", price: "210", weight: "0.75L", kcal: "", desc: "PURCARI", allergens: "", img: "" },
+      { name: "PIPER HEIDSIECK-SAMPANIE BRUT NON VINTAGE ALC 12% 0,75L", category: "Spumante & Șampanie", price: "390", weight: "0,75L", kcal: "", desc: "PIPER HEIDSIECK", allergens: "", img: "" },
+      { name: "PIPER HEIDSIECK - ŞAMPANIE EXTRA BRUT ESSENTIEL BLANC DE BLANCS ALC 12% 0,75L", category: "Spumante & Șampanie", price: "495", weight: "0,75L", kcal: "", desc: "PIPER HEIDSIECK", allergens: "", img: "" },
+      { name: "PIPER HEIDSIECK - ŞAMPANIE ROSE BRUT ALC 12% 0,75L", category: "Spumante & Șampanie", price: "490", weight: "0,75L", kcal: "", desc: "PIPER HEIDSIECK", allergens: "", img: "" },
+      { name: "FERRARI-SPUMANT MAXIMUM BLANC DE BLANCS BRUT TRENTO DOC NON-VINTAGE 0.75L", category: "Spumante & Șampanie", price: "245", weight: "0.75L", kcal: "", desc: "FERRARI", allergens: "", img: "" },
+      { name: "FERRARI-SPUMANT PERLE BRUT TRENTO DOC 0.75L", category: "Spumante & Șampanie", price: "290", weight: "0.75L", kcal: "", desc: "FERRARI", allergens: "", img: "" },
+      { name: "SERENA 1881-PROSECCO ALB EXTRA DRY DOC 0.75L", category: "Spumante & Șampanie", price: "145", weight: "0.75L", kcal: "", desc: "SERENA", allergens: "", img: "" },
+      { name: "SERENA 1881-PROSECCO ROSE BRUT MILLESIMATO DOC 0.75L", category: "Spumante & Șampanie", price: "155", weight: "0.75L", kcal: "", desc: "SERENA", allergens: "", img: "" },
+      { name: "VILLE DARFANTA-PROSECCO MILLESIMATO VALDOBBIADENE ALB BRUT DOCG 0.75L", category: "Spumante & Șampanie", price: "165", weight: "0.75L", kcal: "", desc: "SERENA", allergens: "", img: "" },
+
+      // ==========================================
+      // CAFEA & CEAI
+      // ==========================================
+      { name: "Espresso (30ml)", category: "Cafea & Ceai", price: "14", weight: "30ml", kcal: "", desc: "Cafea de specialitate", allergens: "", img: "" },
+      { name: "Double Espresso (60ml)", category: "Cafea & Ceai", price: "16", weight: "60ml", kcal: "", desc: "Cafea de specialitate", allergens: "", img: "" },
+      { name: "Espresso Macchiato (80ml)", category: "Cafea & Ceai", price: "16", weight: "80ml", kcal: "", desc: "Cafea de specialitate", allergens: "", img: "" },
+      { name: "Long Black (60ml)", category: "Cafea & Ceai", price: "16", weight: "60ml", kcal: "", desc: "Cafea de specialitate", allergens: "", img: "" },
+      { name: "Cappuccino (200ml)", category: "Cafea & Ceai", price: "19", weight: "200ml", kcal: "", desc: "Cafea de specialitate", allergens: "", img: "" },
+      { name: "Cafe Latte (250ml)", category: "Cafea & Ceai", price: "19", weight: "250ml", kcal: "", desc: "Cafea de specialitate", allergens: "", img: "" },
+      { name: "Flat White (200ml)", category: "Cafea & Ceai", price: "20", weight: "200ml", kcal: "", desc: "Cafea de specialitate", allergens: "", img: "" },
+      { name: "China Jasmine", category: "Cafea & Ceai", price: "19", weight: "400ml", kcal: "", desc: "Selecţie de Ceaiuri (400ml)", allergens: "", img: "" },
+      { name: "English Breakfast", category: "Cafea & Ceai", price: "19", weight: "400ml", kcal: "", desc: "Selecţie de Ceaiuri (400ml)", allergens: "", img: "" },
+      { name: "Nana Mint", category: "Cafea & Ceai", price: "19", weight: "400ml", kcal: "", desc: "Selecţie de Ceaiuri (400ml)", allergens: "", img: "" },
+      { name: "Wild Berry", category: "Cafea & Ceai", price: "19", weight: "400ml", kcal: "", desc: "Selecţie de Ceaiuri (400ml)", allergens: "", img: "" },
+
+      // ==========================================
+      // RĂCORITOARE & FRESH
+      // ==========================================
+      { name: "Apă plată / minerală (330ml)", category: "Răcoritoare", price: "15", weight: "330ml", kcal: "", desc: "Răcoritoare & Apă", allergens: "", img: "" },
+      { name: "Coca-Cola/Coca-Cola Zero (250ml)", category: "Răcoritoare", price: "15", weight: "250ml", kcal: "", desc: "Răcoritoare & Apă", allergens: "", img: "" },
+      { name: "Fanta / Sprite (250ml)", category: "Răcoritoare", price: "15", weight: "250ml", kcal: "", desc: "Răcoritoare & Apă", allergens: "", img: "" },
+      { name: "Kinley Tonic (250ml)", category: "Răcoritoare", price: "19", weight: "250ml", kcal: "", desc: "Răcoritoare & Apă", allergens: "", img: "" },
+      { name: "Fresh Portocale (200ml)", category: "Răcoritoare", price: "25", weight: "200ml", kcal: "", desc: "Fresh-uri & Limonade", allergens: "", img: "" },
+      { name: "Fresh Grapefruit (200ml)", category: "Răcoritoare", price: "25", weight: "200ml", kcal: "", desc: "Fresh-uri & Limonade", allergens: "", img: "" },
+      { name: "Limonadă Clasică", category: "Răcoritoare", price: "24", weight: "", kcal: "", desc: "Fresh-uri & Limonade", allergens: "", img: "" },
+      { name: "Limonadă cu Căpşuni", category: "Răcoritoare", price: "26", weight: "", kcal: "", desc: "Fresh-uri & Limonade", allergens: "", img: "" },
+      { name: "Limonadă cu Mentă", category: "Răcoritoare", price: "26", weight: "", kcal: "", desc: "Fresh-uri & Limonade", allergens: "", img: "" },
+
+      // ==========================================
+      // COCKTAILURI (Alcoolice & Long Drinks)
+      // ==========================================
+      { name: "Amaretto Sour", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Godfather", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Blue Lagoon", category: "Cocktails", price: "34", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Bellini", category: "Cocktails", price: "34", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Espresso Martini", category: "Cocktails", price: "40", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Black Russian", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Ruby Sour", category: "Cocktails", price: "34", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Hugo (250ml)", category: "Cocktails", price: "38", weight: "250ml", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Aperol Spritz (250ml)", category: "Cocktails", price: "39", weight: "250ml", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Negroni (250ml)", category: "Cocktails", price: "42", weight: "250ml", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Margarita", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Cosmopolitan", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Limoncello Spritz", category: "Cocktails", price: "42", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Sex on the Beach", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Whisky Sour", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Tequila Sunrise", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Daiquiri", category: "Cocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Alcoolice", allergens: "", img: "" },
+      { name: "Cuba Libre (250ml)", category: "Cocktails", price: "34", weight: "250ml", kcal: "", desc: "Long Drinks", allergens: "", img: "" },
+      { name: "Vodka Orange (250ml)", category: "Cocktails", price: "34", weight: "250ml", kcal: "", desc: "Long Drinks", allergens: "", img: "" },
+      { name: "Campari Orange (250ml)", category: "Cocktails", price: "36", weight: "250ml", kcal: "", desc: "Long Drinks", allergens: "", img: "" },
+      { name: "Gin Tonic (250ml)", category: "Cocktails", price: "36", weight: "250ml", kcal: "", desc: "Long Drinks", allergens: "", img: "" },
+      { name: "Gin Tonic Oyster", category: "Cocktails", price: "45", weight: "", kcal: "", desc: "Long Drinks", allergens: "", img: "" },
+      { name: "Gin Tonic WN Pink Grapefruit", category: "Cocktails", price: "41", weight: "", kcal: "", desc: "Long Drinks", allergens: "", img: "" },
+      { name: "Gin Tonic WN Quince", category: "Cocktails", price: "41", weight: "", kcal: "", desc: "Long Drinks", allergens: "", img: "" },
+      { name: "Gin Tonic WN Raspberry", category: "Cocktails", price: "41", weight: "", kcal: "", desc: "Long Drinks", allergens: "", img: "" },
+
+      // ==========================================
+      // MOCKTAILS (Cocktailuri Non-Alcoolice)
+      // ==========================================
+      { name: "Green Apple (250ml)", category: "Mocktails", price: "29", weight: "250ml", kcal: "", desc: "Cocktailuri Non-Alcoolice (Mocktails)", allergens: "", img: "" },
+      { name: "Cranberry Lime Spritzer (250ml)", category: "Mocktails", price: "29", weight: "250ml", kcal: "", desc: "Cocktailuri Non-Alcoolice (Mocktails)", allergens: "", img: "" },
+      { name: "Safe Sex", category: "Mocktails", price: "32", weight: "", kcal: "", desc: "Cocktailuri Non-Alcoolice (Mocktails)", allergens: "", img: "" },
+      { name: "Sweet Tonic", category: "Mocktails", price: "32", weight: "", kcal: "", desc: "Cocktailuri Non-Alcoolice (Mocktails)", allergens: "", img: "" },
+      { name: "Gin fără Alcool", category: "Mocktails", price: "38", weight: "", kcal: "", desc: "Cocktailuri Non-Alcoolice (Mocktails)", allergens: "", img: "" },
+
+      // ==========================================
+      // BERE & CIDRU
+      // ==========================================
+      { name: "Carlsberg (330ml)", category: "Bere & Cidru", price: "22", weight: "330ml", kcal: "", desc: "Bere la Sticlă & Draught", allergens: "", img: "" },
+      { name: "Carlsberg draught (400ml)", category: "Bere & Cidru", price: "25", weight: "400ml", kcal: "", desc: "Bere la Sticlă & Draught", allergens: "", img: "" },
+      { name: "Bucur (350ml)", category: "Bere & Cidru", price: "22", weight: "350ml", kcal: "", desc: "Bere la Sticlă & Draught", allergens: "", img: "" },
+      { name: "Kronenbourg 1664 Blanc (330ml)", category: "Bere & Cidru", price: "30", weight: "330ml", kcal: "", desc: "Bere la Sticlă & Draught", allergens: "", img: "" },
+      { name: "Carlsberg 0% (fără alcool, 330ml)", category: "Bere & Cidru", price: "21", weight: "330ml", kcal: "", desc: "Bere la Sticlă & Draught", allergens: "", img: "" },
+
+      // ==========================================
+      // SPIRTOSI, DIGESTIVE & SHOTS
+      // ==========================================
+      { name: "Whisky Johnnie Walker RED", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Whisky & Bourbon", allergens: "", img: "" },
+      { name: "Whisky Johnnie Walker BLACK", category: "Spirtoase & Shots", price: "35", weight: "40ml", kcal: "", desc: "Whisky & Bourbon", allergens: "", img: "" },
+      { name: "Whisky Glenfiddich", category: "Spirtoase & Shots", price: "45", weight: "40ml", kcal: "", desc: "Whisky & Bourbon", allergens: "", img: "" },
+      { name: "Vinars VSOP Miorița", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Cognac & Vinars", allergens: "", img: "" },
+      { name: "Vinars XO Miorița", category: "Spirtoase & Shots", price: "35", weight: "40ml", kcal: "", desc: "Cognac & Vinars", allergens: "", img: "" },
+      { name: "Whitley Neill Dry", category: "Spirtoase & Shots", price: "19", weight: "40ml", kcal: "", desc: "Gin & Vodka", allergens: "", img: "" },
+      { name: "Whitley Neill Pink Grapefruit", category: "Spirtoase & Shots", price: "24", weight: "40ml", kcal: "", desc: "Gin & Vodka", allergens: "", img: "" },
+      { name: "Whitley Neill Quince", category: "Spirtoase & Shots", price: "24", weight: "40ml", kcal: "", desc: "Gin & Vodka", allergens: "", img: "" },
+      { name: "Whitley Neill Raspberry", category: "Spirtoase & Shots", price: "24", weight: "40ml", kcal: "", desc: "Gin & Vodka", allergens: "", img: "" },
+      { name: "Oyster Fine Claire GIN", category: "Spirtoase & Shots", price: "30", weight: "40ml", kcal: "", desc: "Gin & Vodka", allergens: "", img: "" },
+      { name: "Vodka Belenkaya", category: "Spirtoase & Shots", price: "20", weight: "40ml", kcal: "", desc: "Gin & Vodka", allergens: "", img: "" },
+      { name: "Vodka Beluga", category: "Spirtoase & Shots", price: "30", weight: "40ml", kcal: "", desc: "Gin & Vodka", allergens: "", img: "" },
+      { name: "Rom/Havana 7 years", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Rom & Tequila", allergens: "", img: "" },
+      { name: "Rom/La Criolla", category: "Spirtoase & Shots", price: "20", weight: "40ml", kcal: "", desc: "Rom & Tequila", allergens: "", img: "" },
+      { name: "Tequila Jose Cuervo", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Rom & Tequila", allergens: "", img: "" },
+      { name: "Tequila Cazcabel", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Rom & Tequila", allergens: "", img: "" },
+      { name: "Tequila Cazcabel Coffee", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Rom & Tequila", allergens: "", img: "" },
+      { name: "Amaretto / Aperitivo", category: "Spirtoase & Shots", price: "22", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Amaro del Capo / Caffo Vecchio Amaro", category: "Spirtoase & Shots", price: "22", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Baileys Irish Cream", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Caffo Grappa Unica", category: "Spirtoase & Shots", price: "22", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Campari", category: "Spirtoase & Shots", price: "22", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Fernet Branca", category: "Spirtoase & Shots", price: "23", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Jägermeister", category: "Spirtoase & Shots", price: "22", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Limoncello", category: "Spirtoase & Shots", price: "22", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Vermouth Blanc / Rosso", category: "Spirtoase & Shots", price: "22", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Pălincă Gutui", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Pălincă Prune", category: "Spirtoase & Shots", price: "23", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Vişinată", category: "Spirtoase & Shots", price: "25", weight: "40ml", kcal: "", desc: "Lichioruri, Vermut & Digestive", allergens: "", img: "" },
+      { name: "Shot", category: "Spirtoase & Shots", price: "21", weight: "40ml", kcal: "", desc: "Shots", allergens: "", img: "" },
+      { name: "Shot B52", category: "Spirtoase & Shots", price: "24", weight: "40ml", kcal: "", desc: "Shots", allergens: "", img: "" },
+
+      // ==========================================
+      // LA FINAL, CEVA DULCE
+      // ==========================================
+      {
+        name: "San Sebastian",
+        category: "La final, ceva dulce",
+        price: "33",
+        weight: "160 g ± 10%",
+        kcal: "",
+        desc: "cremă de brânză, ouă, smântână, vanilie, amidon",
+        allergens: "gluten, ouă și derivate, arahide și derivate, lactate, fructe cu coajă lemnoasă",
+        img: "San Sebastian.jpeg",
+        tags: ["veg"]
+      },
+      {
+        name: "Prăjitură fistic și zmeură",
+        category: "La final, ceva dulce",
+        price: "33",
+        weight: "130 g ± 10%",
+        kcal: "",
+        desc: "unt, zahăr, făină de migdale, ouă, fistic, zmeură, amidon, glucoză, ciocolată, lapte, sare, smântână",
+        allergens: "gluten, ouă și derivate, arahide și derivate, lactate, fructe cu coajă lemnoasă",
+        img: "Prăjitură fistic și zmeură.jpeg",
+        tags: ["veg"]
+      },
+      {
+        name: "Forêt Noire",
+        category: "La final, ceva dulce",
+        price: "39",
+        weight: "155 g ± 5%",
+        kcal: "",
+        desc: "ciocolată cu lapte și ciocolată neagră, lapte, smântână pentru frișcă, sare Maldon, gelatină, piure de cireșe, vișine, glucoză, pectină NH, făină de grâu, făină de migdale, zahăr, ouă, unt",
+        allergens: "gluten, ouă și derivate, arahide și derivate, lactate, fructe cu coajă lemnoasă",
+        img: "Forêt Noire.jpeg",
+        tags: ["veg"]
+      }
+    ];
+
+    let currentCategory = "Toate";
+    let searchQuery = "";
+
+    const categoriesContainer = document.getElementById("categoriesContainer");
+    const menuList = document.getElementById("menuList");
+    const searchInput = document.getElementById("searchInput");
+
+    const categories = [
+      "Toate",
+      "Pentru început",
+      "Feluri principale",
+      "Alături",
+      "Vinuri Locale",
+      "Vinuri Import",
+      "Spumante & Șampanie",
+      "Cafea & Ceai",
+      "Răcoritoare",
+      "Cocktails",
+      "Mocktails",
+      "Bere & Cidru",
+      "Spirtoase & Shots",
+      "La final, ceva dulce"
+    ];
+
+    const foodCategoriesWithImages = [
+      "Pentru început",
+      "Feluri principale",
+      "Alături",
+      "La final, ceva dulce"
+    ];
+
+    function renderCategories() {
+      categoriesContainer.innerHTML = categories.map(cat => `
+        <button class="cat-btn ${cat === currentCategory ? 'active' : ''}" onclick="selectCategory('${cat}')">
+          ${cat}
+        </button>
+      `).join("");
+    }
+
+    function selectCategory(cat) {
+      currentCategory = cat;
+      renderCategories();
+      renderMenu();
+    }
+
+    function renderMenu() {
+      const filtered = menuData.filter(item => {
+        const matchesCat = currentCategory === "Toate" || item.category === currentCategory;
+        const matchesQuery = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                             item.desc.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCat && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        menuList.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 50px 0; font-size: 0.9rem;">Nu a fost găsit niciun preparat sau băutură.</div>`;
+        return;
+      }
+
+      menuList.innerHTML = filtered.map(item => {
+        const canHaveImage = foodCategoriesWithImages.includes(item.category);
+
+        let tagsHtml = "";
+        if (item.tags && item.tags.length > 0) {
+          tagsHtml = `<div class="diet-badges">` + item.tags.map(t => {
+            if (t === "veg") return `<span class="diet-badge badge-vegetarian">🌱 Vegetarian</span>`;
+            if (t === "gf") return `<span class="diet-badge badge-gluten-free">🌾 Fără Gluten</span>`;
+            if (t === "fish") return `<span class="diet-badge badge-fish">🐟 Pește</span>`;
+            return "";
+          }).join("") + `</div>`;
+        }
+
+        return `
+          <div class="product-card">
+            ${canHaveImage ? `
+              <div class="product-img-wrapper">
+                ${item.img 
+                  ? `<img src="${encodeURI(item.img)}" alt="${item.name}" loading="lazy">` 
+                  : `<span class="placeholder-badge">Foto preparat</span>`
+                }
+              </div>
+            ` : ''}
+            <div class="product-body">
+              <div class="product-header-row">
+                <h3 class="product-title">${item.name}</h3>
+                ${tagsHtml}
+              </div>
+              <p class="product-desc">${item.desc}</p>
+              ${item.allergens ? `<div class="product-allergens">⚠️ Alergeni: ${item.allergens}</div>` : ''}
+              <div class="product-meta">
+                ${item.weight ? `<span class="meta-tag">${item.weight}</span>` : ''}
+                ${item.kcal ? `<span class="meta-tag">${item.kcal}</span>` : ''}
+                <span class="meta-tag">${item.category}</span>
+              </div>
+              <div class="product-footer">
+                ${item.price 
+                  ? `<div class="price-btn">${item.price} lei</div>` 
+                  : `<div class="price-btn no-price">Preț la cerere</div>`
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value;
+      renderMenu();
+    });
+
+    renderCategories();
+    renderMenu();
+  </script>
+</body>
+</html>
